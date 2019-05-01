@@ -30,15 +30,16 @@
         {
             this.StartTxt = new System.Windows.Forms.TextBox();
             this.ArrivalTxt = new System.Windows.Forms.TextBox();
-            this.StartLstBox = new System.Windows.Forms.ListBox();
             this.ArrivalLstBox = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.listBox3 = new System.Windows.Forms.ListBox();
+            this.SearchBtn = new System.Windows.Forms.Button();
+            this.ConnectionsBtn = new System.Windows.Forms.Button();
+            this.ConnectionLstBox = new System.Windows.Forms.ListBox();
             this.Connections = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.StationBoardBtn = new System.Windows.Forms.Button();
+            this.StartLstBox = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,14 +57,6 @@
             this.ArrivalTxt.Size = new System.Drawing.Size(100, 20);
             this.ArrivalTxt.TabIndex = 1;
             // 
-            // StartLstBox
-            // 
-            this.StartLstBox.FormattingEnabled = true;
-            this.StartLstBox.Location = new System.Drawing.Point(141, 97);
-            this.StartLstBox.Name = "StartLstBox";
-            this.StartLstBox.Size = new System.Drawing.Size(178, 121);
-            this.StartLstBox.TabIndex = 2;
-            // 
             // ArrivalLstBox
             // 
             this.ArrivalLstBox.FormattingEnabled = true;
@@ -72,32 +65,33 @@
             this.ArrivalLstBox.Size = new System.Drawing.Size(174, 121);
             this.ArrivalLstBox.TabIndex = 3;
             // 
-            // button1
+            // SearchBtn
             // 
-            this.button1.Location = new System.Drawing.Point(531, 97);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.OnSearchClick);
+            this.SearchBtn.Location = new System.Drawing.Point(531, 97);
+            this.SearchBtn.Name = "SearchBtn";
+            this.SearchBtn.Size = new System.Drawing.Size(82, 23);
+            this.SearchBtn.TabIndex = 4;
+            this.SearchBtn.Text = "Suche";
+            this.SearchBtn.UseVisualStyleBackColor = true;
+            this.SearchBtn.Click += new System.EventHandler(this.OnSearchClick);
             // 
-            // button2
+            // ConnectionsBtn
             // 
-            this.button2.Location = new System.Drawing.Point(531, 126);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.ConnectionsBtn.Location = new System.Drawing.Point(531, 126);
+            this.ConnectionsBtn.Name = "ConnectionsBtn";
+            this.ConnectionsBtn.Size = new System.Drawing.Size(82, 23);
+            this.ConnectionsBtn.TabIndex = 5;
+            this.ConnectionsBtn.Text = "Verbindungen";
+            this.ConnectionsBtn.UseVisualStyleBackColor = true;
+            this.ConnectionsBtn.Click += new System.EventHandler(this.OnConnectionsClick);
             // 
-            // listBox3
+            // ConnectionLstBox
             // 
-            this.listBox3.FormattingEnabled = true;
-            this.listBox3.Location = new System.Drawing.Point(141, 250);
-            this.listBox3.Name = "listBox3";
-            this.listBox3.Size = new System.Drawing.Size(567, 147);
-            this.listBox3.TabIndex = 6;
+            this.ConnectionLstBox.FormattingEnabled = true;
+            this.ConnectionLstBox.Location = new System.Drawing.Point(141, 250);
+            this.ConnectionLstBox.Name = "ConnectionLstBox";
+            this.ConnectionLstBox.Size = new System.Drawing.Size(567, 147);
+            this.ConnectionLstBox.TabIndex = 6;
             // 
             // Connections
             // 
@@ -139,20 +133,39 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
             // 
+            // StationBoardBtn
+            // 
+            this.StationBoardBtn.Location = new System.Drawing.Point(531, 155);
+            this.StationBoardBtn.Name = "StationBoardBtn";
+            this.StationBoardBtn.Size = new System.Drawing.Size(82, 23);
+            this.StationBoardBtn.TabIndex = 11;
+            this.StationBoardBtn.Text = "Station Board";
+            this.StationBoardBtn.UseVisualStyleBackColor = true;
+            this.StationBoardBtn.Click += new System.EventHandler(this.OnStationBoardClick);
+            // 
+            // StartLstBox
+            // 
+            this.StartLstBox.FormattingEnabled = true;
+            this.StartLstBox.Location = new System.Drawing.Point(141, 97);
+            this.StartLstBox.Name = "StartLstBox";
+            this.StartLstBox.Size = new System.Drawing.Size(174, 121);
+            this.StartLstBox.TabIndex = 12;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.StartLstBox);
+            this.Controls.Add(this.StationBoardBtn);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Connections);
-            this.Controls.Add(this.listBox3);
+            this.Controls.Add(this.ConnectionLstBox);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.ConnectionsBtn);
+            this.Controls.Add(this.SearchBtn);
             this.Controls.Add(this.ArrivalLstBox);
-            this.Controls.Add(this.StartLstBox);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -167,15 +180,16 @@
 
         private System.Windows.Forms.TextBox StartTxt;
         private System.Windows.Forms.TextBox ArrivalTxt;
-        private System.Windows.Forms.ListBox StartLstBox;
         private System.Windows.Forms.ListBox ArrivalLstBox;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ListBox listBox3;
+        private System.Windows.Forms.Button SearchBtn;
+        private System.Windows.Forms.Button ConnectionsBtn;
+        private System.Windows.Forms.ListBox ConnectionLstBox;
         private System.Windows.Forms.Label Connections;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button StationBoardBtn;
+        private System.Windows.Forms.ListBox StartLstBox;
     }
 }
 
