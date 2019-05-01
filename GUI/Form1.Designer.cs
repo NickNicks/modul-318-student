@@ -37,25 +37,32 @@
             this.Connections = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.StationBoardBtn = new System.Windows.Forms.Button();
             this.StartLstBox = new System.Windows.Forms.ListBox();
-            this.groupBox1.SuspendLayout();
+            this.PanelForRadioBtn = new System.Windows.Forms.Panel();
+            this.LaterRadio = new System.Windows.Forms.RadioButton();
+            this.NowRadio = new System.Windows.Forms.RadioButton();
+            this.PanelForTxtBox = new System.Windows.Forms.Panel();
+            this.DateTimeBox = new System.Windows.Forms.DateTimePicker();
+            this.PanelForRadioBtn.SuspendLayout();
+            this.PanelForTxtBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // StartTxt
             // 
-            this.StartTxt.Location = new System.Drawing.Point(6, 19);
+            this.StartTxt.Location = new System.Drawing.Point(0, 4);
             this.StartTxt.Name = "StartTxt";
             this.StartTxt.Size = new System.Drawing.Size(100, 20);
             this.StartTxt.TabIndex = 0;
+            this.StartTxt.TextChanged += new System.EventHandler(this.OnTextChange);
             // 
             // ArrivalTxt
             // 
-            this.ArrivalTxt.Location = new System.Drawing.Point(184, 19);
+            this.ArrivalTxt.Location = new System.Drawing.Point(184, 4);
             this.ArrivalTxt.Name = "ArrivalTxt";
             this.ArrivalTxt.Size = new System.Drawing.Size(100, 20);
             this.ArrivalTxt.TabIndex = 1;
+            this.ArrivalTxt.TextChanged += new System.EventHandler(this.OnTextChange);
             // 
             // ArrivalLstBox
             // 
@@ -67,21 +74,21 @@
             // 
             // SearchBtn
             // 
-            this.SearchBtn.Location = new System.Drawing.Point(531, 97);
+            this.SearchBtn.Location = new System.Drawing.Point(531, 139);
             this.SearchBtn.Name = "SearchBtn";
-            this.SearchBtn.Size = new System.Drawing.Size(82, 23);
+            this.SearchBtn.Size = new System.Drawing.Size(154, 23);
             this.SearchBtn.TabIndex = 4;
-            this.SearchBtn.Text = "Suche";
+            this.SearchBtn.Text = "Stationen Suchen";
             this.SearchBtn.UseVisualStyleBackColor = true;
             this.SearchBtn.Click += new System.EventHandler(this.OnSearchClick);
             // 
             // ConnectionsBtn
             // 
-            this.ConnectionsBtn.Location = new System.Drawing.Point(531, 126);
+            this.ConnectionsBtn.Location = new System.Drawing.Point(531, 168);
             this.ConnectionsBtn.Name = "ConnectionsBtn";
-            this.ConnectionsBtn.Size = new System.Drawing.Size(82, 23);
+            this.ConnectionsBtn.Size = new System.Drawing.Size(154, 23);
             this.ConnectionsBtn.TabIndex = 5;
-            this.ConnectionsBtn.Text = "Verbindungen";
+            this.ConnectionsBtn.Text = "Verbindungen Suchen";
             this.ConnectionsBtn.UseVisualStyleBackColor = true;
             this.ConnectionsBtn.Click += new System.EventHandler(this.OnConnectionsClick);
             // 
@@ -105,7 +112,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(144, 9);
+            this.label1.Location = new System.Drawing.Point(138, 48);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(60, 13);
             this.label1.TabIndex = 8;
@@ -114,32 +121,19 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(322, 9);
+            this.label2.Location = new System.Drawing.Point(322, 48);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 9;
             this.label2.Text = "Zielstation";
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.ArrivalTxt);
-            this.groupBox1.Controls.Add(this.StartTxt);
-            this.groupBox1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox1.Location = new System.Drawing.Point(141, 23);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(358, 68);
-            this.groupBox1.TabIndex = 10;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
-            // 
             // StationBoardBtn
             // 
-            this.StationBoardBtn.Location = new System.Drawing.Point(531, 155);
+            this.StationBoardBtn.Location = new System.Drawing.Point(531, 197);
             this.StationBoardBtn.Name = "StationBoardBtn";
-            this.StationBoardBtn.Size = new System.Drawing.Size(82, 23);
+            this.StationBoardBtn.Size = new System.Drawing.Size(154, 23);
             this.StationBoardBtn.TabIndex = 11;
-            this.StationBoardBtn.Text = "Station Board";
+            this.StationBoardBtn.Text = "Stationboard Anzeigen";
             this.StationBoardBtn.UseVisualStyleBackColor = true;
             this.StationBoardBtn.Click += new System.EventHandler(this.OnStationBoardClick);
             // 
@@ -151,14 +145,65 @@
             this.StartLstBox.Size = new System.Drawing.Size(174, 121);
             this.StartLstBox.TabIndex = 12;
             // 
+            // PanelForRadioBtn
+            // 
+            this.PanelForRadioBtn.Controls.Add(this.LaterRadio);
+            this.PanelForRadioBtn.Controls.Add(this.NowRadio);
+            this.PanelForRadioBtn.Location = new System.Drawing.Point(531, 39);
+            this.PanelForRadioBtn.Name = "PanelForRadioBtn";
+            this.PanelForRadioBtn.Size = new System.Drawing.Size(121, 49);
+            this.PanelForRadioBtn.TabIndex = 13;
+            // 
+            // LaterRadio
+            // 
+            this.LaterRadio.AutoSize = true;
+            this.LaterRadio.Location = new System.Drawing.Point(3, 26);
+            this.LaterRadio.Name = "LaterRadio";
+            this.LaterRadio.Size = new System.Drawing.Size(102, 17);
+            this.LaterRadio.TabIndex = 1;
+            this.LaterRadio.TabStop = true;
+            this.LaterRadio.Text = "Späteren Datum";
+            this.LaterRadio.UseVisualStyleBackColor = true;
+            this.LaterRadio.CheckedChanged += new System.EventHandler(this.OnRadioCheckChange);
+            // 
+            // NowRadio
+            // 
+            this.NowRadio.AutoSize = true;
+            this.NowRadio.Location = new System.Drawing.Point(3, 3);
+            this.NowRadio.Name = "NowRadio";
+            this.NowRadio.Size = new System.Drawing.Size(47, 17);
+            this.NowRadio.TabIndex = 0;
+            this.NowRadio.TabStop = true;
+            this.NowRadio.Text = "Jetzt";
+            this.NowRadio.UseVisualStyleBackColor = true;
+            this.NowRadio.CheckedChanged += new System.EventHandler(this.OnRadioCheckChange);
+            // 
+            // PanelForTxtBox
+            // 
+            this.PanelForTxtBox.Controls.Add(this.StartTxt);
+            this.PanelForTxtBox.Controls.Add(this.ArrivalTxt);
+            this.PanelForTxtBox.Location = new System.Drawing.Point(141, 64);
+            this.PanelForTxtBox.Name = "PanelForTxtBox";
+            this.PanelForTxtBox.Size = new System.Drawing.Size(320, 27);
+            this.PanelForTxtBox.TabIndex = 14;
+            // 
+            // DateTimeBox
+            // 
+            this.DateTimeBox.Location = new System.Drawing.Point(531, 97);
+            this.DateTimeBox.Name = "DateTimeBox";
+            this.DateTimeBox.Size = new System.Drawing.Size(200, 20);
+            this.DateTimeBox.TabIndex = 15;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(847, 439);
+            this.Controls.Add(this.DateTimeBox);
+            this.Controls.Add(this.PanelForTxtBox);
+            this.Controls.Add(this.PanelForRadioBtn);
             this.Controls.Add(this.StartLstBox);
             this.Controls.Add(this.StationBoardBtn);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Connections);
             this.Controls.Add(this.ConnectionLstBox);
@@ -169,8 +214,10 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.PanelForRadioBtn.ResumeLayout(false);
+            this.PanelForRadioBtn.PerformLayout();
+            this.PanelForTxtBox.ResumeLayout(false);
+            this.PanelForTxtBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -187,9 +234,13 @@
         private System.Windows.Forms.Label Connections;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button StationBoardBtn;
         private System.Windows.Forms.ListBox StartLstBox;
+        private System.Windows.Forms.Panel PanelForRadioBtn;
+        private System.Windows.Forms.RadioButton LaterRadio;
+        private System.Windows.Forms.RadioButton NowRadio;
+        private System.Windows.Forms.Panel PanelForTxtBox;
+        private System.Windows.Forms.DateTimePicker DateTimeBox;
     }
 }
 

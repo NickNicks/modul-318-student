@@ -21,14 +21,12 @@ namespace GUI
 
         private void OnButtonCLick(object sender, EventArgs e)
         {
-
-
             Stations mystations = T.GetStations("Luz");
         }
 
         private void OnSearchClick(object sender, EventArgs e)
         {
-            foreach (TextBox s in groupBox1.Controls)
+            foreach (TextBox s in PanelForTxtBox.Controls)
             {              
                 GetListStations(s);
             }
@@ -55,8 +53,15 @@ namespace GUI
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ArrivalLstBox.Items.Add("Um Verbindungen zu suchen");
-            ArrivalLstBox.Items.Add("Ziel Text Box ausfüllen");           
+            ArrivalLstBox.Items.Add("Um Verbindungen zu suchen,");
+            ArrivalLstBox.Items.Add("Ziel Text Box auch ausfüllen");
+            StartLstBox.Items.Add("Um die Stationboard anzuzeigen");
+            StartLstBox.Items.Add("zuerst Station hier suchen und");
+            StartLstBox.Items.Add("auswählen");
+            NowRadio.Checked = true;
+            ConnectionsBtn.Enabled = false;
+            StationBoardBtn.Enabled = false;
+            RadioBtnCheck();
         }
 
         private void OnConnectionsClick(object sender, EventArgs e)
@@ -80,7 +85,40 @@ namespace GUI
 
         private void OnStationBoardClick(object sender, EventArgs e)
         {
-            
+            List<string> StationBoardList = new List<string>();
+            Stations S = T.GetStations(StartTxt.Text);
+            Station WantedStation = S.StationList[StartLstBox.SelectedIndex];
+            StationBoardRoot SB = T.GetStationBoard(WantedStation.Name, WantedStation.Id);
+
+            foreach (StationBoard STemp in SB.Entries)
+            {
+              
+                StationBoardList.Add(STemp.Name + " " + STemp.Category + " " + STemp.Number + " " + STemp.To + " " + STemp.Operator + " " + STemp.Stop.Departure.ToShortTimeString());
+            }
+
+            ConnectionLstBox.DataSource = StationBoardList;
+        }
+        private void RadioBtnCheck()
+        {
+            if (NowRadio.Checked)
+                DateTimeBox.Enabled = false;
+            else
+                DateTimeBox.Enabled = true;  
+        }
+
+        private void OnRadioCheckChange(object sender, EventArgs e)
+        {
+            RadioBtnCheck();
+        }
+
+        private void OnTextChange(object sender, EventArgs e)
+        {
+            if (StartTxt.TextLength > 0)
+                ConnectionsBtn.Enabled = true;
+            if (ArrivalTxt.TextLength > 0)
+                ConnectionsBtn.Enabled = true;
+
+
         }
     }
 }
