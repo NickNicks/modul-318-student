@@ -49,6 +49,7 @@
             this.LocalMapsBtn = new System.Windows.Forms.Button();
             this.StationMapBtn = new System.Windows.Forms.Button();
             this.EmailShareBtn = new System.Windows.Forms.Button();
+            this.SwitchBtn = new System.Windows.Forms.Button();
             this.PanelForRadioBtn.SuspendLayout();
             this.PanelForTxtBox.SuspendLayout();
             this.SuspendLayout();
@@ -83,7 +84,7 @@
             // 
             // SearchBtn
             // 
-            this.SearchBtn.Location = new System.Drawing.Point(606, 137);
+            this.SearchBtn.Location = new System.Drawing.Point(665, 139);
             this.SearchBtn.Name = "SearchBtn";
             this.SearchBtn.Size = new System.Drawing.Size(154, 23);
             this.SearchBtn.TabIndex = 4;
@@ -93,7 +94,7 @@
             // 
             // ConnectionsBtn
             // 
-            this.ConnectionsBtn.Location = new System.Drawing.Point(606, 166);
+            this.ConnectionsBtn.Location = new System.Drawing.Point(665, 168);
             this.ConnectionsBtn.Name = "ConnectionsBtn";
             this.ConnectionsBtn.Size = new System.Drawing.Size(154, 23);
             this.ConnectionsBtn.TabIndex = 5;
@@ -103,12 +104,12 @@
             // 
             // ConnectionLstBox
             // 
-            this.ConnectionLstBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ConnectionLstBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F);
             this.ConnectionLstBox.FormattingEnabled = true;
             this.ConnectionLstBox.ItemHeight = 29;
             this.ConnectionLstBox.Location = new System.Drawing.Point(76, 262);
             this.ConnectionLstBox.Name = "ConnectionLstBox";
-            this.ConnectionLstBox.Size = new System.Drawing.Size(707, 149);
+            this.ConnectionLstBox.Size = new System.Drawing.Size(566, 149);
             this.ConnectionLstBox.TabIndex = 6;
             // 
             // Connections
@@ -140,7 +141,7 @@
             // 
             // StationBoardBtn
             // 
-            this.StationBoardBtn.Location = new System.Drawing.Point(606, 195);
+            this.StationBoardBtn.Location = new System.Drawing.Point(665, 197);
             this.StationBoardBtn.Name = "StationBoardBtn";
             this.StationBoardBtn.Size = new System.Drawing.Size(154, 23);
             this.StationBoardBtn.TabIndex = 11;
@@ -162,7 +163,7 @@
             // 
             this.PanelForRadioBtn.Controls.Add(this.LaterRadio);
             this.PanelForRadioBtn.Controls.Add(this.NowRadio);
-            this.PanelForRadioBtn.Location = new System.Drawing.Point(606, 23);
+            this.PanelForRadioBtn.Location = new System.Drawing.Point(665, 25);
             this.PanelForRadioBtn.Name = "PanelForRadioBtn";
             this.PanelForRadioBtn.Size = new System.Drawing.Size(121, 49);
             this.PanelForRadioBtn.TabIndex = 13;
@@ -193,17 +194,17 @@
             // 
             // PanelForTxtBox
             // 
+            this.PanelForTxtBox.Controls.Add(this.SwitchBtn);
             this.PanelForTxtBox.Controls.Add(this.StartTxt);
             this.PanelForTxtBox.Controls.Add(this.ArrivalTxt);
             this.PanelForTxtBox.Location = new System.Drawing.Point(76, 64);
             this.PanelForTxtBox.Name = "PanelForTxtBox";
             this.PanelForTxtBox.Size = new System.Drawing.Size(385, 32);
             this.PanelForTxtBox.TabIndex = 14;
-            this.PanelForTxtBox.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelForTxtBox_Paint);
             // 
             // DateBox
             // 
-            this.DateBox.Location = new System.Drawing.Point(606, 107);
+            this.DateBox.Location = new System.Drawing.Point(665, 109);
             this.DateBox.Name = "DateBox";
             this.DateBox.Size = new System.Drawing.Size(133, 20);
             this.DateBox.TabIndex = 16;
@@ -211,7 +212,7 @@
             // HourTxt
             // 
             this.HourTxt.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.HourTxt.Location = new System.Drawing.Point(606, 81);
+            this.HourTxt.Location = new System.Drawing.Point(665, 83);
             this.HourTxt.Name = "HourTxt";
             this.HourTxt.Size = new System.Drawing.Size(31, 20);
             this.HourTxt.TabIndex = 17;
@@ -221,7 +222,7 @@
             // MinuteTxt
             // 
             this.MinuteTxt.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.MinuteTxt.Location = new System.Drawing.Point(643, 81);
+            this.MinuteTxt.Location = new System.Drawing.Point(702, 83);
             this.MinuteTxt.Name = "MinuteTxt";
             this.MinuteTxt.Size = new System.Drawing.Size(31, 20);
             this.MinuteTxt.TabIndex = 18;
@@ -230,36 +231,49 @@
             // 
             // LocalMapsBtn
             // 
-            this.LocalMapsBtn.Location = new System.Drawing.Point(606, 224);
+            this.LocalMapsBtn.Location = new System.Drawing.Point(665, 226);
             this.LocalMapsBtn.Name = "LocalMapsBtn";
             this.LocalMapsBtn.Size = new System.Drawing.Size(154, 23);
             this.LocalMapsBtn.TabIndex = 19;
             this.LocalMapsBtn.Text = "Lokale Karte Anzeigen";
             this.LocalMapsBtn.UseVisualStyleBackColor = true;
+            this.LocalMapsBtn.Click += new System.EventHandler(this.OnLocalMapsBtnClick);
             // 
             // StationMapBtn
             // 
-            this.StationMapBtn.Location = new System.Drawing.Point(606, 288);
+            this.StationMapBtn.Location = new System.Drawing.Point(662, 291);
             this.StationMapBtn.Name = "StationMapBtn";
             this.StationMapBtn.Size = new System.Drawing.Size(154, 47);
             this.StationMapBtn.TabIndex = 20;
             this.StationMapBtn.Text = "Station Bei Maps Anzeigen";
             this.StationMapBtn.UseVisualStyleBackColor = true;
+            this.StationMapBtn.Click += new System.EventHandler(this.OnStationMapBtnClick);
             // 
             // EmailShareBtn
             // 
-            this.EmailShareBtn.Location = new System.Drawing.Point(606, 341);
+            this.EmailShareBtn.Location = new System.Drawing.Point(662, 344);
             this.EmailShareBtn.Name = "EmailShareBtn";
             this.EmailShareBtn.Size = new System.Drawing.Size(154, 47);
             this.EmailShareBtn.TabIndex = 21;
             this.EmailShareBtn.Text = "Email Share";
             this.EmailShareBtn.UseVisualStyleBackColor = true;
+            this.EmailShareBtn.Click += new System.EventHandler(this.OnEmailShareBtnClick);
+            // 
+            // SwitchBtn
+            // 
+            this.SwitchBtn.Location = new System.Drawing.Point(149, 5);
+            this.SwitchBtn.Name = "SwitchBtn";
+            this.SwitchBtn.Size = new System.Drawing.Size(54, 25);
+            this.SwitchBtn.TabIndex = 22;
+            this.SwitchBtn.Text = "<->";
+            this.SwitchBtn.UseVisualStyleBackColor = true;
+            this.SwitchBtn.Click += new System.EventHandler(this.OnSwitchBtnClick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(847, 439);
+            this.ClientSize = new System.Drawing.Size(845, 439);
             this.Controls.Add(this.EmailShareBtn);
             this.Controls.Add(this.StationMapBtn);
             this.Controls.Add(this.LocalMapsBtn);
@@ -312,6 +326,7 @@
         private System.Windows.Forms.Button LocalMapsBtn;
         private System.Windows.Forms.Button StationMapBtn;
         private System.Windows.Forms.Button EmailShareBtn;
+        private System.Windows.Forms.Button SwitchBtn;
     }
 }
 

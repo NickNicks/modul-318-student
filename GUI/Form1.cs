@@ -9,12 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SwissTransport;
 using System.Globalization;
+using System.Diagnostics;
+using System.Device.Location;
+
 
 namespace GUI
 {
     public partial class Form1 : Form
     {
         Transport T = new Transport();
+        GeoCoordinateWatcher watcher = new GeoCoordinateWatcher();
         public Form1()
         {
             InitializeComponent();
@@ -138,7 +142,6 @@ namespace GUI
             else
                 StationBoardBtn.Enabled = false;
 
-
         }
 
         private void OnHourTxtEnter(object sender, EventArgs e)
@@ -151,7 +154,36 @@ namespace GUI
             MinuteTxt.Text = "";
         }
 
-        private void PanelForTxtBox_Paint(object sender, PaintEventArgs e)
+        private void OnStationMapBtnClick(object sender, EventArgs e)
+        {
+            string query = StartLstBox.SelectedItem.ToString();
+            query.Replace(" ", "+");
+            System.Diagnostics.Process.Start("https://www.google.com/maps/search/" + query);
+
+        }
+
+        private void OnEmailShareBtnClick(object sender, EventArgs e)
+        {
+            var url = "mailto:Email@Eingeben.com?Subject=Nicht%20SBB%20App%20Erfindungen&body=" + ConnectionLstBox.SelectedItem.ToString();
+            Process.Start(url);
+        }
+
+        private void OnLocalMapsBtnClick(object sender, EventArgs e)
+        {          
+
+            // Do not suppress prompt, and wait 1000 milliseconds to start.
+            watcher.TryStart(false, TimeSpan.FromMilliseconds(1000));
+
+            var whereat = watcher.Position.Location;
+
+            var Lat = whereat.Latitude.ToString("0.000000");
+            var Lon = whereat.Longitude.ToString("0.000000");
+            System.Diagnostics.Process.Start("https://map.search.ch/@"+ Lat +" "+ Lon  +"?poi=haltestelle,zug&z=256");
+
+
+        }
+
+        private void OnSwitchBtnClick(object sender, EventArgs e)
         {
 
         }
