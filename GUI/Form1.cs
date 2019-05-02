@@ -54,9 +54,14 @@ namespace GUI
                 ArrivalLstBox.DataSource = null;
                 ArrivalLstBox.DataSource = StartList;
             }
+            ListViewItem connection1 = new ListViewItem();
+            connection1.Text = null;
+            connection1.SubItems.Add(S.Name);
+            connection1.SubItems.Add();
+            listView1.Items.Add(connection1);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void OnFormLoad(object sender, EventArgs e)
         {
             ArrivalLstBox.Items.Add("Um Verbindungen zu suchen,");
             ArrivalLstBox.Items.Add("Ziel Text Box auch ausfüllen");
@@ -67,6 +72,7 @@ namespace GUI
             ConnectionsBtn.Enabled = false;
             StationBoardBtn.Enabled = false;
             RadioBtnCheck();
+            
         }
 
         private void OnConnectionsClick(object sender, EventArgs e)
@@ -88,7 +94,7 @@ namespace GUI
                 {
                     DateTime Departure = DateTime.Parse(s.From.Departure);
                     DateTime Arrival = DateTime.Parse(s.To.Arrival);
-                    ConnectionsList.Add("Abfahrt:"+ Departure.ToShortTimeString() + " Ankunft:" + Arrival.ToShortTimeString() + " Platform:" + s.From.Arrival + " Verspätung:" + s.From.Delay);
+                    ConnectionsList.Add("Abfahrt:"+ Departure.ToShortTimeString() + " Ankunft:" + Arrival.ToShortTimeString() + " Platform:" + s.From.Platform + " Verspätung:" + s.From.Delay);
                 }
                 ConnectionLstBox.DataSource = null;
                 ConnectionLstBox.DataSource = ConnectionsList;
@@ -97,17 +103,24 @@ namespace GUI
 
         private void OnStationBoardClick(object sender, EventArgs e)
         {
+           
             List<string> StationBoardList = new List<string>();
             Stations S = T.GetStations(StartTxt.Text);
-            Station WantedStation = S.StationList[StartLstBox.SelectedIndex];
-            StationBoardRoot SB = T.GetStationBoard(WantedStation.Name, WantedStation.Id);
-
-            foreach (StationBoard STemp in SB.Entries)
+            if (StartLstBox.SelectedIndex >= 0)
             {
-              
-                StationBoardList.Add(STemp.Name + " " + STemp.Category + " " + STemp.Number + " " + STemp.To + " " + STemp.Operator + " " + STemp.Stop.Departure.ToShortTimeString());
-            }
+                Station WantedStation = S.StationList[StartLstBox.SelectedIndex];
+                StationBoardRoot SB = T.GetStationBoard(WantedStation.Name, WantedStation.Id);
+                foreach (StationBoard STemp in SB.Entries)
+                {
 
+                    StationBoardList.Add(STemp.Category + " " + STemp.Number + " " + STemp.To + " " + STemp.Operator + " " + STemp.Stop.Departure.ToShortTimeString());
+                }
+            }
+            else
+            {
+                MessageBox.Show("Keine Station ausgewählt");
+            }
+           
             ConnectionLstBox.DataSource = StationBoardList;
         }
         private void RadioBtnCheck()
@@ -131,17 +144,28 @@ namespace GUI
             RadioBtnCheck();
         }
 
-        private void OnTextChange(object sender, EventArgs e)
+        private void TextExistProof()
         {
+            Form form1 = new Form1();
             if (ArrivalTxt.TextLength > 0 && StartTxt.TextLength > 0)
+            {
                 ConnectionsBtn.Enabled = true;
+                form1.AcceptButton = ConnectionsBtn;
+            }
             else
                 ConnectionsBtn.Enabled = false;
-            if (ArrivalTxt.TextLength <= 0 && StartTxt.TextLength > 0 )
+            if (ArrivalTxt.TextLength <= 0 && StartTxt.TextLength > 0)
+            {
                 StationBoardBtn.Enabled = true;
+                form1.AcceptButton = StationBoardBtn;
+            }
             else
                 StationBoardBtn.Enabled = false;
 
+            if (ArrivalTxt.TextLength == 0)
+                ArrivalLstBox.DataSource = null;
+            if (StartTxt.TextLength == 0)
+                StartLstBox.DataSource = null;
         }
 
         private void OnHourTxtEnter(object sender, EventArgs e)
@@ -156,16 +180,30 @@ namespace GUI
 
         private void OnStationMapBtnClick(object sender, EventArgs e)
         {
-            string query = StartLstBox.SelectedItem.ToString();
-            query.Replace(" ", "+");
-            System.Diagnostics.Process.Start("https://www.google.com/maps/search/" + query);
+            if (ConnectionLstBox.SelectedIndex >= 0)
+            {
+                string query = StartLstBox.SelectedItem.ToString();
+                query.Replace(" ", "+");
+                System.Diagnostics.Process.Start("https://www.google.com/maps/search/" + query);
+            }
+            else
+            {
+                MessageBox.Show("Keine Station Ausgewählt");
+            }
 
         }
 
         private void OnEmailShareBtnClick(object sender, EventArgs e)
         {
-            var url = "mailto:Email@Eingeben.com?Subject=Nicht%20SBB%20App%20Erfindungen&body=" + ConnectionLstBox.SelectedItem.ToString();
-            Process.Start(url);
+            if (ConnectionLstBox.SelectedIndex >= 0)
+            {
+                var url = "mailto:Email@Eingeben.com?Subject=Nicht%20SBB%20App%20Erfindungen&body=" + ConnectionLstBox.SelectedItem.ToString();
+                Process.Start(url);
+            }
+            else
+            {
+                MessageBox.Show("Keine Station/Fahrt Ausgewählt");
+            }
         }
 
         private void OnLocalMapsBtnClick(object sender, EventArgs e)
@@ -185,7 +223,29 @@ namespace GUI
 
         private void OnSwitchBtnClick(object sender, EventArgs e)
         {
+            string TempSwitch = StartTxt.Text;
+            StartTxt.Text = ArrivalTxt.Text;
+            ArrivalTxt.Text = TempSwitch;          
+        }
 
+        private void OnStartTxtChange(object sender, EventArgs e)
+        {
+            TextExistProof();
+            if(StartTxt.TextLength >= 3)
+            GetListStations(StartTxt);          
+        }
+
+        private void OnArrivalTxtChange(object sender, EventArgs e)
+        {
+            TextExistProof();
+            if (StartTxt.TextLength >= 3)
+            GetListStations(ArrivalTxt);
+        }
+
+        private void OnHourTxtLeave(object sender, EventArgs e)
+        {
+            if (HourTxt.TextLength == 0)
+                HourTxt.Text ="hh";
         }
     }
 }
