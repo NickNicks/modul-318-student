@@ -46,37 +46,44 @@
             this.DateBox = new System.Windows.Forms.DateTimePicker();
             this.HourTxt = new System.Windows.Forms.TextBox();
             this.MinuteTxt = new System.Windows.Forms.TextBox();
+            this.LocalMapsBtn = new System.Windows.Forms.Button();
+            this.StationMapBtn = new System.Windows.Forms.Button();
+            this.EmailShareBtn = new System.Windows.Forms.Button();
             this.PanelForRadioBtn.SuspendLayout();
             this.PanelForTxtBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // StartTxt
             // 
+            this.StartTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StartTxt.Location = new System.Drawing.Point(0, 4);
             this.StartTxt.Name = "StartTxt";
-            this.StartTxt.Size = new System.Drawing.Size(100, 20);
+            this.StartTxt.Size = new System.Drawing.Size(100, 26);
             this.StartTxt.TabIndex = 0;
             this.StartTxt.TextChanged += new System.EventHandler(this.OnTextChange);
             // 
             // ArrivalTxt
             // 
-            this.ArrivalTxt.Location = new System.Drawing.Point(184, 4);
+            this.ArrivalTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ArrivalTxt.Location = new System.Drawing.Point(249, 4);
             this.ArrivalTxt.Name = "ArrivalTxt";
-            this.ArrivalTxt.Size = new System.Drawing.Size(100, 20);
+            this.ArrivalTxt.Size = new System.Drawing.Size(100, 26);
             this.ArrivalTxt.TabIndex = 1;
             this.ArrivalTxt.TextChanged += new System.EventHandler(this.OnTextChange);
             // 
             // ArrivalLstBox
             // 
+            this.ArrivalLstBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ArrivalLstBox.FormattingEnabled = true;
+            this.ArrivalLstBox.ItemHeight = 20;
             this.ArrivalLstBox.Location = new System.Drawing.Point(325, 97);
             this.ArrivalLstBox.Name = "ArrivalLstBox";
-            this.ArrivalLstBox.Size = new System.Drawing.Size(174, 134);
+            this.ArrivalLstBox.Size = new System.Drawing.Size(239, 124);
             this.ArrivalLstBox.TabIndex = 3;
             // 
             // SearchBtn
             // 
-            this.SearchBtn.Location = new System.Drawing.Point(531, 153);
+            this.SearchBtn.Location = new System.Drawing.Point(606, 137);
             this.SearchBtn.Name = "SearchBtn";
             this.SearchBtn.Size = new System.Drawing.Size(154, 23);
             this.SearchBtn.TabIndex = 4;
@@ -86,7 +93,7 @@
             // 
             // ConnectionsBtn
             // 
-            this.ConnectionsBtn.Location = new System.Drawing.Point(531, 182);
+            this.ConnectionsBtn.Location = new System.Drawing.Point(606, 166);
             this.ConnectionsBtn.Name = "ConnectionsBtn";
             this.ConnectionsBtn.Size = new System.Drawing.Size(154, 23);
             this.ConnectionsBtn.TabIndex = 5;
@@ -96,16 +103,18 @@
             // 
             // ConnectionLstBox
             // 
+            this.ConnectionLstBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ConnectionLstBox.FormattingEnabled = true;
-            this.ConnectionLstBox.Location = new System.Drawing.Point(141, 262);
+            this.ConnectionLstBox.ItemHeight = 29;
+            this.ConnectionLstBox.Location = new System.Drawing.Point(76, 262);
             this.ConnectionLstBox.Name = "ConnectionLstBox";
-            this.ConnectionLstBox.Size = new System.Drawing.Size(567, 147);
+            this.ConnectionLstBox.Size = new System.Drawing.Size(707, 149);
             this.ConnectionLstBox.TabIndex = 6;
             // 
             // Connections
             // 
             this.Connections.AutoSize = true;
-            this.Connections.Location = new System.Drawing.Point(138, 246);
+            this.Connections.Location = new System.Drawing.Point(73, 246);
             this.Connections.Name = "Connections";
             this.Connections.Size = new System.Drawing.Size(73, 13);
             this.Connections.TabIndex = 7;
@@ -114,7 +123,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(138, 48);
+            this.label1.Location = new System.Drawing.Point(73, 45);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(60, 13);
             this.label1.TabIndex = 8;
@@ -131,7 +140,7 @@
             // 
             // StationBoardBtn
             // 
-            this.StationBoardBtn.Location = new System.Drawing.Point(531, 211);
+            this.StationBoardBtn.Location = new System.Drawing.Point(606, 195);
             this.StationBoardBtn.Name = "StationBoardBtn";
             this.StationBoardBtn.Size = new System.Drawing.Size(154, 23);
             this.StationBoardBtn.TabIndex = 11;
@@ -141,17 +150,19 @@
             // 
             // StartLstBox
             // 
+            this.StartLstBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StartLstBox.FormattingEnabled = true;
-            this.StartLstBox.Location = new System.Drawing.Point(141, 97);
+            this.StartLstBox.ItemHeight = 20;
+            this.StartLstBox.Location = new System.Drawing.Point(76, 97);
             this.StartLstBox.Name = "StartLstBox";
-            this.StartLstBox.Size = new System.Drawing.Size(174, 134);
+            this.StartLstBox.Size = new System.Drawing.Size(239, 124);
             this.StartLstBox.TabIndex = 12;
             // 
             // PanelForRadioBtn
             // 
             this.PanelForRadioBtn.Controls.Add(this.LaterRadio);
             this.PanelForRadioBtn.Controls.Add(this.NowRadio);
-            this.PanelForRadioBtn.Location = new System.Drawing.Point(531, 39);
+            this.PanelForRadioBtn.Location = new System.Drawing.Point(606, 23);
             this.PanelForRadioBtn.Name = "PanelForRadioBtn";
             this.PanelForRadioBtn.Size = new System.Drawing.Size(121, 49);
             this.PanelForRadioBtn.TabIndex = 13;
@@ -184,14 +195,15 @@
             // 
             this.PanelForTxtBox.Controls.Add(this.StartTxt);
             this.PanelForTxtBox.Controls.Add(this.ArrivalTxt);
-            this.PanelForTxtBox.Location = new System.Drawing.Point(141, 64);
+            this.PanelForTxtBox.Location = new System.Drawing.Point(76, 64);
             this.PanelForTxtBox.Name = "PanelForTxtBox";
-            this.PanelForTxtBox.Size = new System.Drawing.Size(320, 27);
+            this.PanelForTxtBox.Size = new System.Drawing.Size(385, 32);
             this.PanelForTxtBox.TabIndex = 14;
+            this.PanelForTxtBox.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelForTxtBox_Paint);
             // 
             // DateBox
             // 
-            this.DateBox.Location = new System.Drawing.Point(531, 123);
+            this.DateBox.Location = new System.Drawing.Point(606, 107);
             this.DateBox.Name = "DateBox";
             this.DateBox.Size = new System.Drawing.Size(133, 20);
             this.DateBox.TabIndex = 16;
@@ -199,7 +211,7 @@
             // HourTxt
             // 
             this.HourTxt.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.HourTxt.Location = new System.Drawing.Point(531, 97);
+            this.HourTxt.Location = new System.Drawing.Point(606, 81);
             this.HourTxt.Name = "HourTxt";
             this.HourTxt.Size = new System.Drawing.Size(31, 20);
             this.HourTxt.TabIndex = 17;
@@ -209,18 +221,48 @@
             // MinuteTxt
             // 
             this.MinuteTxt.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.MinuteTxt.Location = new System.Drawing.Point(568, 97);
+            this.MinuteTxt.Location = new System.Drawing.Point(643, 81);
             this.MinuteTxt.Name = "MinuteTxt";
             this.MinuteTxt.Size = new System.Drawing.Size(31, 20);
             this.MinuteTxt.TabIndex = 18;
             this.MinuteTxt.Text = "mm";
             this.MinuteTxt.Enter += new System.EventHandler(this.OnMinuteEnter);
             // 
+            // LocalMapsBtn
+            // 
+            this.LocalMapsBtn.Location = new System.Drawing.Point(606, 224);
+            this.LocalMapsBtn.Name = "LocalMapsBtn";
+            this.LocalMapsBtn.Size = new System.Drawing.Size(154, 23);
+            this.LocalMapsBtn.TabIndex = 19;
+            this.LocalMapsBtn.Text = "Lokale Karte Anzeigen";
+            this.LocalMapsBtn.UseVisualStyleBackColor = true;
+            // 
+            // StationMapBtn
+            // 
+            this.StationMapBtn.Location = new System.Drawing.Point(606, 288);
+            this.StationMapBtn.Name = "StationMapBtn";
+            this.StationMapBtn.Size = new System.Drawing.Size(154, 47);
+            this.StationMapBtn.TabIndex = 20;
+            this.StationMapBtn.Text = "Station Bei Maps Anzeigen";
+            this.StationMapBtn.UseVisualStyleBackColor = true;
+            // 
+            // EmailShareBtn
+            // 
+            this.EmailShareBtn.Location = new System.Drawing.Point(606, 341);
+            this.EmailShareBtn.Name = "EmailShareBtn";
+            this.EmailShareBtn.Size = new System.Drawing.Size(154, 47);
+            this.EmailShareBtn.TabIndex = 21;
+            this.EmailShareBtn.Text = "Email Share";
+            this.EmailShareBtn.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(847, 439);
+            this.Controls.Add(this.EmailShareBtn);
+            this.Controls.Add(this.StationMapBtn);
+            this.Controls.Add(this.LocalMapsBtn);
             this.Controls.Add(this.MinuteTxt);
             this.Controls.Add(this.HourTxt);
             this.Controls.Add(this.DateBox);
@@ -267,6 +309,9 @@
         private System.Windows.Forms.DateTimePicker DateBox;
         private System.Windows.Forms.TextBox HourTxt;
         private System.Windows.Forms.TextBox MinuteTxt;
+        private System.Windows.Forms.Button LocalMapsBtn;
+        private System.Windows.Forms.Button StationMapBtn;
+        private System.Windows.Forms.Button EmailShareBtn;
     }
 }
 

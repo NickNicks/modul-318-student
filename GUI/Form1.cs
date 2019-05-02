@@ -70,10 +70,14 @@ namespace GUI
 
             if (StartLstBox.SelectedIndex >= 0 && ArrivalLstBox.SelectedIndex >= 0)
             {
-
+                string Time = DateTime.Now.ToString("HH:mm");
+                if (LaterRadio.Checked)
+                {
+                    Time = HourTxt.Text + ":" + MinuteTxt.Text;
+                }                  
                 DateTime DateTemp = DateTime.ParseExact((DateBox.Value.Date).ToString(), "dd/MM/yyyy HH:mm:ss", null);
-                string Date= DateTemp.ToString("yyyy/MM/dd");
-                Connections S = T.GetConnections(Convert.ToString(StartLstBox.SelectedItem), Convert.ToString(ArrivalLstBox.SelectedItem),HourTxt.Text + ":" + MinuteTxt.Text , Convert.ToString(Date));
+                String Date = DateTemp.ToString("yyyy/MM/dd");
+                Connections S = T.GetConnections(Convert.ToString(StartLstBox.SelectedItem), Convert.ToString(ArrivalLstBox.SelectedItem),Time , Convert.ToString(Date));
                 List<string> ConnectionsList = new List<string>();
                 
                 foreach (Connection s in S.ConnectionList)
@@ -125,11 +129,11 @@ namespace GUI
 
         private void OnTextChange(object sender, EventArgs e)
         {
-            if (StartTxt.TextLength > 0)
+            if (ArrivalTxt.TextLength > 0 && StartTxt.TextLength > 0)
                 ConnectionsBtn.Enabled = true;
             else
                 ConnectionsBtn.Enabled = false;
-            if (ArrivalTxt.TextLength > 0 && StartTxt.TextLength > 0 )
+            if (ArrivalTxt.TextLength <= 0 && StartTxt.TextLength > 0 )
                 StationBoardBtn.Enabled = true;
             else
                 StationBoardBtn.Enabled = false;
@@ -145,6 +149,11 @@ namespace GUI
         private void OnMinuteEnter(object sender, EventArgs e)
         {
             MinuteTxt.Text = "";
+        }
+
+        private void PanelForTxtBox_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
