@@ -39,7 +39,7 @@ namespace GUI
         public void GetListStations(TextBox Box)
         {
             Stations S = T.GetStations(Box.Text);
-            List<string> StartList = new List<string>();
+            List<string> StartList = new List<string>();         
             foreach (Station s in S.StationList)
             {
                 StartList.Add(s.Name);
@@ -54,11 +54,7 @@ namespace GUI
                 ArrivalLstBox.DataSource = null;
                 ArrivalLstBox.DataSource = StartList;
             }
-            ListViewItem connection1 = new ListViewItem();
-            connection1.Text = null;
-            connection1.SubItems.Add(S.Name);
-            connection1.SubItems.Add();
-            listView1.Items.Add(connection1);
+
         }
 
         private void OnFormLoad(object sender, EventArgs e)
@@ -88,32 +84,59 @@ namespace GUI
                 DateTime DateTemp = DateTime.ParseExact((DateBox.Value.Date).ToString(), "dd/MM/yyyy HH:mm:ss", null);
                 String Date = DateTemp.ToString("yyyy/MM/dd");
                 Connections S = T.GetConnections(Convert.ToString(StartLstBox.SelectedItem), Convert.ToString(ArrivalLstBox.SelectedItem),Time , Convert.ToString(Date));
-                List<string> ConnectionsList = new List<string>();
+                listView1.Items.Clear();
+                listView1.Columns.Clear();
+                listView1.Columns.Add("", 2, HorizontalAlignment.Left);
+                listView1.Columns.Add("Abfahrt", 100, HorizontalAlignment.Left);
+                listView1.Columns.Add("Ankunft", 100, HorizontalAlignment.Left);
+                listView1.Columns.Add("Dauer(Minuten)", 135, HorizontalAlignment.Left);
+                listView1.Columns.Add("Gleis", 100, HorizontalAlignment.Left);
+                listView1.Columns.Add("Verspätung", 100, HorizontalAlignment.Left);
                 
+
                 foreach (Connection s in S.ConnectionList)
                 {
                     DateTime Departure = DateTime.Parse(s.From.Departure);
-                    DateTime Arrival = DateTime.Parse(s.To.Arrival);
-                    ConnectionsList.Add("Abfahrt:"+ Departure.ToShortTimeString() + " Ankunft:" + Arrival.ToShortTimeString() + " Platform:" + s.From.Platform + " Verspätung:" + s.From.Delay);
+                    DateTime Arrival = DateTime.Parse(s.To.Arrival);                   
+                    ListViewItem connection1 = new ListViewItem();
+                    
+                    connection1.SubItems.Add(Departure.ToShortTimeString());
+                    connection1.SubItems.Add(Arrival.ToShortTimeString());
+                    connection1.SubItems.Add(s.Duration.Replace("00d00:",""));
+                    connection1.SubItems.Add(s.From.Platform);
+                    connection1.SubItems.Add(s.From.Delay.ToString());
+                    
+                    listView1.Items.Add(connection1);
                 }
-                ConnectionLstBox.DataSource = null;
-                ConnectionLstBox.DataSource = ConnectionsList;
             }
         }
 
         private void OnStationBoardClick(object sender, EventArgs e)
         {
-           
-            List<string> StationBoardList = new List<string>();
             Stations S = T.GetStations(StartTxt.Text);
             if (StartLstBox.SelectedIndex >= 0)
             {
                 Station WantedStation = S.StationList[StartLstBox.SelectedIndex];
                 StationBoardRoot SB = T.GetStationBoard(WantedStation.Name, WantedStation.Id);
+                listView1.Items.Clear();
+                listView1.Columns.Clear();
+                listView1.Columns.Add("", 2, HorizontalAlignment.Left);
+                listView1.Columns.Add("Kategorie", 100, HorizontalAlignment.Left);
+                listView1.Columns.Add("Nummer", 100, HorizontalAlignment.Left);
+                listView1.Columns.Add("Bis", 135, HorizontalAlignment.Left);
+                listView1.Columns.Add("Operator", 100, HorizontalAlignment.Left);
+                listView1.Columns.Add("Abfahrt", 100, HorizontalAlignment.Left);
                 foreach (StationBoard STemp in SB.Entries)
                 {
+                    ListViewItem connection1 = new ListViewItem();
 
-                    StationBoardList.Add(STemp.Category + " " + STemp.Number + " " + STemp.To + " " + STemp.Operator + " " + STemp.Stop.Departure.ToShortTimeString());
+                    connection1.SubItems.Add(STemp.Category);
+                    connection1.SubItems.Add(STemp.Number);
+                    connection1.SubItems.Add(STemp.To);
+                    connection1.SubItems.Add(STemp.Operator);
+                    connection1.SubItems.Add(STemp.Stop.Departure.ToShortTimeString());
+
+                    listView1.Items.Add(connection1);
                 }
             }
             else
@@ -121,7 +144,6 @@ namespace GUI
                 MessageBox.Show("Keine Station ausgewählt");
             }
            
-            ConnectionLstBox.DataSource = StationBoardList;
         }
         private void RadioBtnCheck()
         {
@@ -180,7 +202,7 @@ namespace GUI
 
         private void OnStationMapBtnClick(object sender, EventArgs e)
         {
-            if (ConnectionLstBox.SelectedIndex >= 0)
+            if (listView1.SelectedItems == null)
             {
                 string query = StartLstBox.SelectedItem.ToString();
                 query.Replace(" ", "+");
@@ -195,9 +217,9 @@ namespace GUI
 
         private void OnEmailShareBtnClick(object sender, EventArgs e)
         {
-            if (ConnectionLstBox.SelectedIndex >= 0)
+            if (listView1.SelectedItems != null)
             {
-                var url = "mailto:Email@Eingeben.com?Subject=Nicht%20SBB%20App%20Erfindungen&body=" + ConnectionLstBox.SelectedItem.ToString();
+                var url = "mailto:Email@Eingeben.com?Subject=Nicht%20SBB%20App%20Erfindungen&body=" + listView1.SelectedItems.ToString();
                 Process.Start(url);
             }
             else
@@ -246,6 +268,16 @@ namespace GUI
         {
             if (HourTxt.TextLength == 0)
                 HourTxt.Text ="hh";
+        }
+
+        private void ListView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnListViewClick(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }

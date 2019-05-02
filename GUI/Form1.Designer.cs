@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             this.StartTxt = new System.Windows.Forms.TextBox();
             this.ArrivalTxt = new System.Windows.Forms.TextBox();
             this.ArrivalLstBox = new System.Windows.Forms.ListBox();
             this.SearchBtn = new System.Windows.Forms.Button();
             this.ConnectionsBtn = new System.Windows.Forms.Button();
-            this.ConnectionLstBox = new System.Windows.Forms.ListBox();
             this.Connections = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -51,9 +51,6 @@
             this.EmailShareBtn = new System.Windows.Forms.Button();
             this.SwitchBtn = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.PanelForRadioBtn.SuspendLayout();
             this.PanelForTxtBox.SuspendLayout();
             this.SuspendLayout();
@@ -81,14 +78,14 @@
             this.ArrivalLstBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ArrivalLstBox.FormattingEnabled = true;
             this.ArrivalLstBox.ItemHeight = 20;
-            this.ArrivalLstBox.Location = new System.Drawing.Point(325, 97);
+            this.ArrivalLstBox.Location = new System.Drawing.Point(310, 97);
             this.ArrivalLstBox.Name = "ArrivalLstBox";
             this.ArrivalLstBox.Size = new System.Drawing.Size(239, 124);
             this.ArrivalLstBox.TabIndex = 3;
             // 
             // SearchBtn
             // 
-            this.SearchBtn.Location = new System.Drawing.Point(665, 139);
+            this.SearchBtn.Location = new System.Drawing.Point(650, 139);
             this.SearchBtn.Name = "SearchBtn";
             this.SearchBtn.Size = new System.Drawing.Size(154, 23);
             this.SearchBtn.TabIndex = 4;
@@ -98,7 +95,7 @@
             // 
             // ConnectionsBtn
             // 
-            this.ConnectionsBtn.Location = new System.Drawing.Point(665, 168);
+            this.ConnectionsBtn.Location = new System.Drawing.Point(650, 168);
             this.ConnectionsBtn.Name = "ConnectionsBtn";
             this.ConnectionsBtn.Size = new System.Drawing.Size(154, 23);
             this.ConnectionsBtn.TabIndex = 5;
@@ -106,20 +103,10 @@
             this.ConnectionsBtn.UseVisualStyleBackColor = true;
             this.ConnectionsBtn.Click += new System.EventHandler(this.OnConnectionsClick);
             // 
-            // ConnectionLstBox
-            // 
-            this.ConnectionLstBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.5F);
-            this.ConnectionLstBox.FormattingEnabled = true;
-            this.ConnectionLstBox.ItemHeight = 26;
-            this.ConnectionLstBox.Location = new System.Drawing.Point(76, 262);
-            this.ConnectionLstBox.Name = "ConnectionLstBox";
-            this.ConnectionLstBox.Size = new System.Drawing.Size(566, 134);
-            this.ConnectionLstBox.TabIndex = 6;
-            // 
             // Connections
             // 
             this.Connections.AutoSize = true;
-            this.Connections.Location = new System.Drawing.Point(73, 246);
+            this.Connections.Location = new System.Drawing.Point(58, 231);
             this.Connections.Name = "Connections";
             this.Connections.Size = new System.Drawing.Size(73, 13);
             this.Connections.TabIndex = 7;
@@ -128,7 +115,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(73, 45);
+            this.label1.Location = new System.Drawing.Point(58, 45);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(60, 13);
             this.label1.TabIndex = 8;
@@ -137,7 +124,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(322, 48);
+            this.label2.Location = new System.Drawing.Point(307, 48);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 9;
@@ -145,7 +132,7 @@
             // 
             // StationBoardBtn
             // 
-            this.StationBoardBtn.Location = new System.Drawing.Point(665, 197);
+            this.StationBoardBtn.Location = new System.Drawing.Point(650, 197);
             this.StationBoardBtn.Name = "StationBoardBtn";
             this.StationBoardBtn.Size = new System.Drawing.Size(154, 23);
             this.StationBoardBtn.TabIndex = 11;
@@ -158,7 +145,7 @@
             this.StartLstBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StartLstBox.FormattingEnabled = true;
             this.StartLstBox.ItemHeight = 20;
-            this.StartLstBox.Location = new System.Drawing.Point(76, 97);
+            this.StartLstBox.Location = new System.Drawing.Point(61, 97);
             this.StartLstBox.Name = "StartLstBox";
             this.StartLstBox.Size = new System.Drawing.Size(239, 124);
             this.StartLstBox.TabIndex = 12;
@@ -167,7 +154,7 @@
             // 
             this.PanelForRadioBtn.Controls.Add(this.LaterRadio);
             this.PanelForRadioBtn.Controls.Add(this.NowRadio);
-            this.PanelForRadioBtn.Location = new System.Drawing.Point(665, 25);
+            this.PanelForRadioBtn.Location = new System.Drawing.Point(650, 25);
             this.PanelForRadioBtn.Name = "PanelForRadioBtn";
             this.PanelForRadioBtn.Size = new System.Drawing.Size(121, 49);
             this.PanelForRadioBtn.TabIndex = 13;
@@ -200,14 +187,14 @@
             // 
             this.PanelForTxtBox.Controls.Add(this.StartTxt);
             this.PanelForTxtBox.Controls.Add(this.ArrivalTxt);
-            this.PanelForTxtBox.Location = new System.Drawing.Point(76, 64);
+            this.PanelForTxtBox.Location = new System.Drawing.Point(61, 64);
             this.PanelForTxtBox.Name = "PanelForTxtBox";
             this.PanelForTxtBox.Size = new System.Drawing.Size(385, 32);
             this.PanelForTxtBox.TabIndex = 14;
             // 
             // DateBox
             // 
-            this.DateBox.Location = new System.Drawing.Point(665, 109);
+            this.DateBox.Location = new System.Drawing.Point(650, 109);
             this.DateBox.Name = "DateBox";
             this.DateBox.Size = new System.Drawing.Size(133, 20);
             this.DateBox.TabIndex = 16;
@@ -215,7 +202,7 @@
             // HourTxt
             // 
             this.HourTxt.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.HourTxt.Location = new System.Drawing.Point(665, 83);
+            this.HourTxt.Location = new System.Drawing.Point(650, 83);
             this.HourTxt.MaxLength = 2;
             this.HourTxt.Name = "HourTxt";
             this.HourTxt.Size = new System.Drawing.Size(31, 20);
@@ -227,7 +214,7 @@
             // MinuteTxt
             // 
             this.MinuteTxt.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.MinuteTxt.Location = new System.Drawing.Point(702, 83);
+            this.MinuteTxt.Location = new System.Drawing.Point(687, 83);
             this.MinuteTxt.MaxLength = 2;
             this.MinuteTxt.Name = "MinuteTxt";
             this.MinuteTxt.Size = new System.Drawing.Size(31, 20);
@@ -237,7 +224,7 @@
             // 
             // LocalMapsBtn
             // 
-            this.LocalMapsBtn.Location = new System.Drawing.Point(665, 226);
+            this.LocalMapsBtn.Location = new System.Drawing.Point(650, 226);
             this.LocalMapsBtn.Name = "LocalMapsBtn";
             this.LocalMapsBtn.Size = new System.Drawing.Size(154, 23);
             this.LocalMapsBtn.TabIndex = 19;
@@ -247,7 +234,7 @@
             // 
             // StationMapBtn
             // 
-            this.StationMapBtn.Location = new System.Drawing.Point(662, 291);
+            this.StationMapBtn.Location = new System.Drawing.Point(650, 317);
             this.StationMapBtn.Name = "StationMapBtn";
             this.StationMapBtn.Size = new System.Drawing.Size(154, 47);
             this.StationMapBtn.TabIndex = 20;
@@ -257,7 +244,7 @@
             // 
             // EmailShareBtn
             // 
-            this.EmailShareBtn.Location = new System.Drawing.Point(662, 344);
+            this.EmailShareBtn.Location = new System.Drawing.Point(650, 370);
             this.EmailShareBtn.Name = "EmailShareBtn";
             this.EmailShareBtn.Size = new System.Drawing.Size(154, 47);
             this.EmailShareBtn.TabIndex = 21;
@@ -267,7 +254,7 @@
             // 
             // SwitchBtn
             // 
-            this.SwitchBtn.Location = new System.Drawing.Point(217, 39);
+            this.SwitchBtn.Location = new System.Drawing.Point(452, 70);
             this.SwitchBtn.Name = "SwitchBtn";
             this.SwitchBtn.Size = new System.Drawing.Size(54, 25);
             this.SwitchBtn.TabIndex = 22;
@@ -277,34 +264,28 @@
             // 
             // listView1
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3});
+            this.listView1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.listView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.listView1.FullRowSelect = true;
             this.listView1.GridLines = true;
-            this.listView1.Location = new System.Drawing.Point(76, 428);
+            this.listView1.HideSelection = false;
+            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1});
+            this.listView1.Location = new System.Drawing.Point(61, 247);
+            this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(566, 131);
+            this.listView1.Size = new System.Drawing.Size(566, 179);
             this.listView1.TabIndex = 23;
             this.listView1.UseCompatibleStateImageBehavior = false;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Tag = "hello";
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Tag = "wa";
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Tag = "ga";
+            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.ListView1_SelectedIndexChanged);
+            this.listView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnListViewClick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(845, 590);
+            this.ClientSize = new System.Drawing.Size(849, 472);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.SwitchBtn);
             this.Controls.Add(this.EmailShareBtn);
@@ -319,7 +300,6 @@
             this.Controls.Add(this.StationBoardBtn);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Connections);
-            this.Controls.Add(this.ConnectionLstBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ConnectionsBtn);
             this.Controls.Add(this.SearchBtn);
@@ -343,7 +323,6 @@
         private System.Windows.Forms.ListBox ArrivalLstBox;
         private System.Windows.Forms.Button SearchBtn;
         private System.Windows.Forms.Button ConnectionsBtn;
-        private System.Windows.Forms.ListBox ConnectionLstBox;
         private System.Windows.Forms.Label Connections;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -361,9 +340,6 @@
         private System.Windows.Forms.Button EmailShareBtn;
         private System.Windows.Forms.Button SwitchBtn;
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
     }
 }
 
