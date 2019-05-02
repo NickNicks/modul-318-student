@@ -19,6 +19,7 @@ namespace GUI
     {
         Transport T = new Transport();
         GeoCoordinateWatcher watcher = new GeoCoordinateWatcher();
+        bool StartTxtPreview = true;
         public Form1()
         {
             InitializeComponent();
@@ -58,56 +59,81 @@ namespace GUI
         }
 
         private void OnFormLoad(object sender, EventArgs e)
-        {
+        {      
             ArrivalLstBox.Items.Add("Um Verbindungen zu suchen,");
             ArrivalLstBox.Items.Add("Ziel Text Box auch ausfüllen");
             StartLstBox.Items.Add("Um die Stationboard anzuzeigen");
             StartLstBox.Items.Add("zuerst Station hier suchen und");
             StartLstBox.Items.Add("auswählen");
+            StartTxt.Text = "Tippe Hier";
             NowRadio.Checked = true;
             ConnectionsBtn.Enabled = false;
             StationBoardBtn.Enabled = false;
             RadioBtnCheck();
-            
+
+            ToolTip toolTip1 = new ToolTip();
+            toolTip1.AutoPopDelay = 5000;
+            toolTip1.InitialDelay = 500;
+            toolTip1.ReshowDelay = 500;
+            toolTip1.ShowAlways = true;
+            toolTip1.SetToolTip(this.SwitchBtn, "Wechselt Abfahrt und Ankunfts Suchbegriffen");
         }
 
         private void OnConnectionsClick(object sender, EventArgs e)
         {
-
             if (StartLstBox.SelectedIndex >= 0 && ArrivalLstBox.SelectedIndex >= 0)
-            {
+            {               
                 string Time = DateTime.Now.ToString("HH:mm");
                 if (LaterRadio.Checked)
                 {
+                    bool HourValid = int.TryParse(HourTxt.Text, out int Hour);
+                    bool MinuteValid = int.TryParse(MinuteTxt.Text, out int Minute);
+                    if (HourValid == false && MinuteValid == false)
+                    {
+                        MessageBox.Show("Bitte Geben Sie Eine Zahl Ein");
+                        return;
+                    }
+
+                    if (Hour <= 0 || Hour >= 24 || Minute <= 0 || Minute >= 60)
+                    {
+                        MessageBox.Show("Bitte Geben Sie Eine Richtige Zahl Ein");
+                        return;
+                    }
+
                     Time = HourTxt.Text + ":" + MinuteTxt.Text;
-                }                  
+                    
+                }
                 DateTime DateTemp = DateTime.ParseExact((DateBox.Value.Date).ToString(), "dd/MM/yyyy HH:mm:ss", null);
                 String Date = DateTemp.ToString("yyyy/MM/dd");
-                Connections S = T.GetConnections(Convert.ToString(StartLstBox.SelectedItem), Convert.ToString(ArrivalLstBox.SelectedItem),Time , Convert.ToString(Date));
+                Connections S = T.GetConnections(Convert.ToString(StartLstBox.SelectedItem), Convert.ToString(ArrivalLstBox.SelectedItem), Time, Convert.ToString(Date));
                 listView1.Items.Clear();
                 listView1.Columns.Clear();
                 listView1.Columns.Add("", 2, HorizontalAlignment.Left);
                 listView1.Columns.Add("Abfahrt", 100, HorizontalAlignment.Left);
                 listView1.Columns.Add("Ankunft", 100, HorizontalAlignment.Left);
-                listView1.Columns.Add("Dauer(Minuten)", 135, HorizontalAlignment.Left);
+                listView1.Columns.Add("Dauer", 100, HorizontalAlignment.Left);
                 listView1.Columns.Add("Gleis", 100, HorizontalAlignment.Left);
                 listView1.Columns.Add("Verspätung", 100, HorizontalAlignment.Left);
-                
+
 
                 foreach (Connection s in S.ConnectionList)
                 {
                     DateTime Departure = DateTime.Parse(s.From.Departure);
-                    DateTime Arrival = DateTime.Parse(s.To.Arrival);                   
+                    DateTime Arrival = DateTime.Parse(s.To.Arrival);
                     ListViewItem connection1 = new ListViewItem();
-                    
+
                     connection1.SubItems.Add(Departure.ToShortTimeString());
                     connection1.SubItems.Add(Arrival.ToShortTimeString());
-                    connection1.SubItems.Add(s.Duration.Replace("00d00:",""));
+                    connection1.SubItems.Add(s.Duration.Replace("00d", ""));
                     connection1.SubItems.Add(s.From.Platform);
                     connection1.SubItems.Add(s.From.Delay.ToString());
-                    
+
                     listView1.Items.Add(connection1);
                 }
+            }
+            else
+            {
+                MessageBox.Show("Bitte Zwei Stationen Auswählen");
             }
         }
 
@@ -192,17 +218,19 @@ namespace GUI
 
         private void OnHourTxtEnter(object sender, EventArgs e)
         {
+            HourTxt.ForeColor = Color.Black;
             HourTxt.Text = "";
         }
 
         private void OnMinuteEnter(object sender, EventArgs e)
         {
+            MinuteTxt.ForeColor = Color.Black;
             MinuteTxt.Text = "";
         }
 
         private void OnStationMapBtnClick(object sender, EventArgs e)
         {
-            if (listView1.SelectedItems == null)
+            if (StartLstBox.SelectedIndex != -1)
             {
                 string query = StartLstBox.SelectedItem.ToString();
                 query.Replace(" ", "+");
@@ -217,9 +245,16 @@ namespace GUI
 
         private void OnEmailShareBtnClick(object sender, EventArgs e)
         {
-            if (listView1.SelectedItems != null)
+            if (listView1.SelectedItems.Count != 0)
             {
-                var url = "mailto:Email@Eingeben.com?Subject=Nicht%20SBB%20App%20Erfindungen&body=" + listView1.SelectedItems.ToString();
+                ListViewItem item = listView1.SelectedItems[0];
+                string mailbody = null;
+               for (int index = 0; index <= item.SubItems.Count-1; index++){
+                    mailbody += item.SubItems[index].Text + " ";
+                }
+
+                var url = "mailto:Email@Eingeben.com?Subject=Nicht%20SBB%20App%20Erfindungen&body=Komm%20Mit!:" + mailbody; 
+                    
                 Process.Start(url);
             }
             else
@@ -238,7 +273,10 @@ namespace GUI
 
             var Lat = whereat.Latitude.ToString("0.000000");
             var Lon = whereat.Longitude.ToString("0.000000");
-            System.Diagnostics.Process.Start("https://map.search.ch/@"+ Lat +" "+ Lon  +"?poi=haltestelle,zug&z=256");
+            if (Lat != "NaN" || Lon != "NaN")
+                System.Diagnostics.Process.Start("https://map.search.ch/@" + Lat + " " + Lon + "?poi=haltestelle,zug&z=256");
+            else
+                MessageBox.Show("Eure Position konnte nicht gefunden werden");
 
 
         }
@@ -253,8 +291,11 @@ namespace GUI
         private void OnStartTxtChange(object sender, EventArgs e)
         {
             TextExistProof();
-            if(StartTxt.TextLength >= 3)
-            GetListStations(StartTxt);          
+            if(StartTxt.TextLength >= 3 && StartTxt.Text != "Tippe Hier")
+            GetListStations(StartTxt);
+            StartLstBox.SelectedIndex = -1;
+            
+            StartLabelUpdate(StartLstBox, false, Keys.K);
         }
 
         private void OnArrivalTxtChange(object sender, EventArgs e)
@@ -262,22 +303,81 @@ namespace GUI
             TextExistProof();
             if (StartTxt.TextLength >= 3)
             GetListStations(ArrivalTxt);
+            ArrivalLstBox.SelectedIndex = -1;
+            StartLabelUpdate(ArrivalLstBox, false, Keys.K);
         }
 
         private void OnHourTxtLeave(object sender, EventArgs e)
         {
+            HourTxt.ForeColor = Color.Gray;
             if (HourTxt.TextLength == 0)
                 HourTxt.Text ="hh";
         }
 
-        private void ListView1_SelectedIndexChanged(object sender, EventArgs e)
+        private void OnMinuteLeave(object sender, EventArgs e)
         {
+            MinuteTxt.ForeColor = Color.Gray;
+            if (MinuteTxt.TextLength == 0)
+                MinuteTxt.Text = "mm";
+        }
+
+        private void OnStartTxtEnter(object sender, EventArgs e)
+        {
+            StartTxt.ForeColor = Color.Black;
+            if (StartTxtPreview == true)
+                StartTxt.Text = "";
+            StartTxtPreview = false;
+        }
+
+        private void OnStartTxtLeave(object sender, EventArgs e)
+        {
+            StartTxt.ForeColor = Color.Black;
+        }
+
+        private void OnStartTxtKeyDown(object sender, KeyEventArgs e)
+        {
+
+                StartLabelUpdate(StartLstBox, false, e.KeyCode);
 
         }
 
-        private void OnListViewClick(object sender, MouseEventArgs e)
+        private void OnArrivalTxtKeyDown(object sender, KeyEventArgs e)
         {
 
+                StartLabelUpdate(ArrivalLstBox, false, e.KeyCode);
+
+        }
+        private void StartLabelUpdate(ListBox LstBox, bool LstBoxCheck,Keys Key)
+        {
+            String StringKey = Key.ToString();
+
+            if (LstBox.SelectedIndex < LstBox.Items.Count - 1 && StringKey == "Down" && LstBoxCheck == false)
+                LstBox.SelectedIndex++;
+
+            if (LstBox.SelectedIndex > -1 && StringKey == "Up" && LstBoxCheck == false)
+                LstBox.SelectedIndex--;
+
+            if (LstBox.SelectedIndex >= 0 && LstBox.Name == "StartLstBox")
+                StartLbl.Text = "Startstation:" + LstBox.SelectedItem.ToString();
+
+            if ((LstBox.SelectedIndex == -1 || StartTxt.Text == "") && LstBox.Name == "StartLstBox")
+                StartLbl.Text = "Startstation";
+
+            if (LstBox.SelectedIndex >= 0 && LstBox.Name == "ArrivalLstBox")
+                ArrivalLbl.Text = "Zielstation:" + LstBox.SelectedItem.ToString();
+
+            if ((LstBox.SelectedIndex == -1 || ArrivalTxt.Text == "") && LstBox.Name == "ArrivalLstBox")
+                ArrivalLbl.Text = "Zielstation";
+        }
+
+        private void OnStartLstBoxKeyDown(object sender, KeyEventArgs e)
+        {
+                StartLabelUpdate(StartLstBox, true, e.KeyCode);
+        }
+
+        private void OnArrivalLstBoxKeyDown(object sender, KeyEventArgs e)
+        {
+            StartLabelUpdate(ArrivalLstBox, true, e.KeyCode);
         }
     }
 }
