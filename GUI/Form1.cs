@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SwissTransport;
+using System.Globalization;
 
 namespace GUI
 {
@@ -69,7 +70,10 @@ namespace GUI
 
             if (StartLstBox.SelectedIndex >= 0 && ArrivalLstBox.SelectedIndex >= 0)
             {
-                Connections S = T.GetConnections(Convert.ToString(StartLstBox.SelectedItem), Convert.ToString(ArrivalLstBox.SelectedItem));
+
+                DateTime DateTemp = DateTime.ParseExact((DateBox.Value.Date).ToString(), "dd/MM/yyyy HH:mm:ss", null);
+                string Date= DateTemp.ToString("yyyy/MM/dd");
+                Connections S = T.GetConnections(Convert.ToString(StartLstBox.SelectedItem), Convert.ToString(ArrivalLstBox.SelectedItem),HourTxt.Text + ":" + MinuteTxt.Text , Convert.ToString(Date));
                 List<string> ConnectionsList = new List<string>();
                 
                 foreach (Connection s in S.ConnectionList)
@@ -101,9 +105,17 @@ namespace GUI
         private void RadioBtnCheck()
         {
             if (NowRadio.Checked)
-                DateTimeBox.Enabled = false;
+            {
+                HourTxt.Enabled = false;
+                MinuteTxt.Enabled = false;
+                DateBox.Enabled = false;
+            }
             else
-                DateTimeBox.Enabled = true;  
+            {
+                HourTxt.Enabled = true;
+                MinuteTxt.Enabled = true;
+                DateBox.Enabled = true;
+            }
         }
 
         private void OnRadioCheckChange(object sender, EventArgs e)
@@ -115,10 +127,24 @@ namespace GUI
         {
             if (StartTxt.TextLength > 0)
                 ConnectionsBtn.Enabled = true;
-            if (ArrivalTxt.TextLength > 0)
-                ConnectionsBtn.Enabled = true;
+            else
+                ConnectionsBtn.Enabled = false;
+            if (ArrivalTxt.TextLength > 0 && StartTxt.TextLength > 0 )
+                StationBoardBtn.Enabled = true;
+            else
+                StationBoardBtn.Enabled = false;
 
 
+        }
+
+        private void OnHourTxtEnter(object sender, EventArgs e)
+        {
+            HourTxt.Text = "";
+        }
+
+        private void OnMinuteEnter(object sender, EventArgs e)
+        {
+            MinuteTxt.Text = "";
         }
     }
 }

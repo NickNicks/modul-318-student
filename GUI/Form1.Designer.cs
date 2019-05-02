@@ -43,7 +43,9 @@
             this.LaterRadio = new System.Windows.Forms.RadioButton();
             this.NowRadio = new System.Windows.Forms.RadioButton();
             this.PanelForTxtBox = new System.Windows.Forms.Panel();
-            this.DateTimeBox = new System.Windows.Forms.DateTimePicker();
+            this.DateBox = new System.Windows.Forms.DateTimePicker();
+            this.HourTxt = new System.Windows.Forms.TextBox();
+            this.MinuteTxt = new System.Windows.Forms.TextBox();
             this.PanelForRadioBtn.SuspendLayout();
             this.PanelForTxtBox.SuspendLayout();
             this.SuspendLayout();
@@ -69,12 +71,12 @@
             this.ArrivalLstBox.FormattingEnabled = true;
             this.ArrivalLstBox.Location = new System.Drawing.Point(325, 97);
             this.ArrivalLstBox.Name = "ArrivalLstBox";
-            this.ArrivalLstBox.Size = new System.Drawing.Size(174, 121);
+            this.ArrivalLstBox.Size = new System.Drawing.Size(174, 134);
             this.ArrivalLstBox.TabIndex = 3;
             // 
             // SearchBtn
             // 
-            this.SearchBtn.Location = new System.Drawing.Point(531, 139);
+            this.SearchBtn.Location = new System.Drawing.Point(531, 153);
             this.SearchBtn.Name = "SearchBtn";
             this.SearchBtn.Size = new System.Drawing.Size(154, 23);
             this.SearchBtn.TabIndex = 4;
@@ -84,7 +86,7 @@
             // 
             // ConnectionsBtn
             // 
-            this.ConnectionsBtn.Location = new System.Drawing.Point(531, 168);
+            this.ConnectionsBtn.Location = new System.Drawing.Point(531, 182);
             this.ConnectionsBtn.Name = "ConnectionsBtn";
             this.ConnectionsBtn.Size = new System.Drawing.Size(154, 23);
             this.ConnectionsBtn.TabIndex = 5;
@@ -95,7 +97,7 @@
             // ConnectionLstBox
             // 
             this.ConnectionLstBox.FormattingEnabled = true;
-            this.ConnectionLstBox.Location = new System.Drawing.Point(141, 250);
+            this.ConnectionLstBox.Location = new System.Drawing.Point(141, 262);
             this.ConnectionLstBox.Name = "ConnectionLstBox";
             this.ConnectionLstBox.Size = new System.Drawing.Size(567, 147);
             this.ConnectionLstBox.TabIndex = 6;
@@ -103,7 +105,7 @@
             // Connections
             // 
             this.Connections.AutoSize = true;
-            this.Connections.Location = new System.Drawing.Point(138, 234);
+            this.Connections.Location = new System.Drawing.Point(138, 246);
             this.Connections.Name = "Connections";
             this.Connections.Size = new System.Drawing.Size(73, 13);
             this.Connections.TabIndex = 7;
@@ -129,7 +131,7 @@
             // 
             // StationBoardBtn
             // 
-            this.StationBoardBtn.Location = new System.Drawing.Point(531, 197);
+            this.StationBoardBtn.Location = new System.Drawing.Point(531, 211);
             this.StationBoardBtn.Name = "StationBoardBtn";
             this.StationBoardBtn.Size = new System.Drawing.Size(154, 23);
             this.StationBoardBtn.TabIndex = 11;
@@ -142,7 +144,7 @@
             this.StartLstBox.FormattingEnabled = true;
             this.StartLstBox.Location = new System.Drawing.Point(141, 97);
             this.StartLstBox.Name = "StartLstBox";
-            this.StartLstBox.Size = new System.Drawing.Size(174, 121);
+            this.StartLstBox.Size = new System.Drawing.Size(174, 134);
             this.StartLstBox.TabIndex = 12;
             // 
             // PanelForRadioBtn
@@ -187,19 +189,41 @@
             this.PanelForTxtBox.Size = new System.Drawing.Size(320, 27);
             this.PanelForTxtBox.TabIndex = 14;
             // 
-            // DateTimeBox
+            // DateBox
             // 
-            this.DateTimeBox.Location = new System.Drawing.Point(531, 97);
-            this.DateTimeBox.Name = "DateTimeBox";
-            this.DateTimeBox.Size = new System.Drawing.Size(200, 20);
-            this.DateTimeBox.TabIndex = 15;
+            this.DateBox.Location = new System.Drawing.Point(531, 123);
+            this.DateBox.Name = "DateBox";
+            this.DateBox.Size = new System.Drawing.Size(133, 20);
+            this.DateBox.TabIndex = 16;
+            // 
+            // HourTxt
+            // 
+            this.HourTxt.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.HourTxt.Location = new System.Drawing.Point(531, 97);
+            this.HourTxt.Name = "HourTxt";
+            this.HourTxt.Size = new System.Drawing.Size(31, 20);
+            this.HourTxt.TabIndex = 17;
+            this.HourTxt.Text = "hh";
+            this.HourTxt.Enter += new System.EventHandler(this.OnHourTxtEnter);
+            // 
+            // MinuteTxt
+            // 
+            this.MinuteTxt.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.MinuteTxt.Location = new System.Drawing.Point(568, 97);
+            this.MinuteTxt.Name = "MinuteTxt";
+            this.MinuteTxt.Size = new System.Drawing.Size(31, 20);
+            this.MinuteTxt.TabIndex = 18;
+            this.MinuteTxt.Text = "mm";
+            this.MinuteTxt.Enter += new System.EventHandler(this.OnMinuteEnter);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(847, 439);
-            this.Controls.Add(this.DateTimeBox);
+            this.Controls.Add(this.MinuteTxt);
+            this.Controls.Add(this.HourTxt);
+            this.Controls.Add(this.DateBox);
             this.Controls.Add(this.PanelForTxtBox);
             this.Controls.Add(this.PanelForRadioBtn);
             this.Controls.Add(this.StartLstBox);
@@ -240,7 +264,9 @@
         private System.Windows.Forms.RadioButton LaterRadio;
         private System.Windows.Forms.RadioButton NowRadio;
         private System.Windows.Forms.Panel PanelForTxtBox;
-        private System.Windows.Forms.DateTimePicker DateTimeBox;
+        private System.Windows.Forms.DateTimePicker DateBox;
+        private System.Windows.Forms.TextBox HourTxt;
+        private System.Windows.Forms.TextBox MinuteTxt;
     }
 }
 
