@@ -326,6 +326,7 @@
             this.Controls.Add(this.SearchBtn);
             this.Controls.Add(this.ArrivalLstBox);
             this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Offizielle Nicht-SBB App";
