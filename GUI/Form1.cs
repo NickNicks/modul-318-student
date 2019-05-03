@@ -28,14 +28,14 @@ namespace GUI
         /// <summary>
         /// Fragt Die API nach Stationen und füllt die respektive (Arrival/Start) ListBox
         /// </summary>
-        /// <param name="Box"></param>
         public void GetListStations(TextBox Box)
         {
-            Stations SearchedStations = T.GetStations(Box.Text);
+            Stations StationList = T.GetStations(Box.Text);
             List<string> StartList = new List<string>();
-            foreach (Station s in SearchedStations.StationList)
+            foreach (Station SearchedStation in StationList.StationList)
             {
-                StartList.Add(s.Name);
+                if (SearchedStation.Id != null) 
+                StartList.Add(SearchedStation.Name);
             }
             if (Box.Name == "StartTxt")
             {
@@ -51,8 +51,6 @@ namespace GUI
         /// <summary>
         /// Vervollstaendigt die Labels über die respektive (Arrival/Start) TextBox mit die Namen der Station
         /// </summary>
-        /// <param name="LstBox"></param>
-        /// <param name="Key"></param>
         private void StartLabelUpdate(ListBox LstBox, Keys Key)
         {
             String StringKey = Key.ToString();
@@ -193,19 +191,19 @@ namespace GUI
                 CentralLstViw.Columns.Add("Verspätung", 100, HorizontalAlignment.Left);
 
                 //Fuellung der Listview
-                foreach (Connection s in SearchedConnections.ConnectionList)
+                foreach (Connection ConnectionItem in SearchedConnections.ConnectionList)
                 {
-                    DateTime Departure = DateTime.Parse(s.From.Departure);
-                    DateTime Arrival = DateTime.Parse(s.To.Arrival);
-                    ListViewItem Connection = new ListViewItem();
+                    DateTime Departure = DateTime.Parse(ConnectionItem.From.Departure);
+                    DateTime Arrival = DateTime.Parse(ConnectionItem.To.Arrival);
+                    ListViewItem ConnectionView = new ListViewItem();
 
-                    Connection.SubItems.Add(Departure.ToShortTimeString());
-                    Connection.SubItems.Add(Arrival.ToShortTimeString());
-                    Connection.SubItems.Add(s.Duration.Replace("00d", ""));
-                    Connection.SubItems.Add(s.From.Platform);
-                    Connection.SubItems.Add(s.From.Delay.ToString());
+                    ConnectionView.SubItems.Add(Departure.ToShortTimeString());
+                    ConnectionView.SubItems.Add(Arrival.ToShortTimeString());
+                    ConnectionView.SubItems.Add(ConnectionItem.Duration.Replace("00d", ""));
+                    ConnectionView.SubItems.Add(ConnectionItem.From.Platform);
+                    ConnectionView.SubItems.Add(ConnectionItem.From.Delay.ToString());
 
-                    CentralLstViw.Items.Add(Connection);
+                    CentralLstViw.Items.Add(ConnectionView);
                 }
             }
             else
@@ -335,16 +333,16 @@ namespace GUI
 
         private void OnHourTxtLeave(object sender, EventArgs e)
         {
-            HourTxt.ForeColor = Color.Gray;
             if (HourTxt.TextLength == 0)
                 HourTxt.Text ="hh";
+            HourTxt.ForeColor = Color.Gray;
         }
 
-        private void OnMinuteLeave(object sender, EventArgs e)
+        private void OnMinuteTxtLeave(object sender, EventArgs e)
         {
-            MinuteTxt.ForeColor = Color.Gray;
             if (MinuteTxt.TextLength == 0)
                 MinuteTxt.Text = "mm";
+            MinuteTxt.ForeColor = Color.Gray;
         }
 
         private void OnStartTxtEnter(object sender, EventArgs e)
@@ -362,29 +360,40 @@ namespace GUI
 
         private void OnStartTxtKeyDown(object sender, KeyEventArgs e)
         {
-                StartLabelUpdate(StartLstBox, e.KeyCode);
+            if (e.KeyCode == Keys.Enter)
+                StationBoardBtn.PerformClick();
+            
+            StartLabelUpdate(StartLstBox, e.KeyCode);
         }
 
         private void OnArrivalTxtKeyDown(object sender, KeyEventArgs e)
         {
-                StartLabelUpdate(ArrivalLstBox, e.KeyCode);
+            if (e.KeyCode == Keys.Enter)
+                ConnectionsBtn.PerformClick();
+
+            StartLabelUpdate(ArrivalLstBox, e.KeyCode);
         }
 
         private void OnStartLstBoxKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Up)
-            {
+            if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Up)           
                 e.Handled = true;
-            }
+            
+
+            if (e.KeyCode == Keys.Enter)
+                StationBoardBtn.PerformClick();
+
             StartLabelUpdate(StartLstBox, e.KeyCode);
         }
 
         private void OnArrivalLstBoxKeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Up)
-            {
                 e.Handled = true;
-            }
+
+            if (e.KeyCode == Keys.Enter)
+                ConnectionsBtn.PerformClick();
+
             StartLabelUpdate(ArrivalLstBox, e.KeyCode);
         }
 
@@ -415,6 +424,12 @@ namespace GUI
             {
                 GetListStations(TxtBox);
             }
+        }
+
+        private void OnTimeTxtKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                ConnectionsBtn.PerformClick();
         }
     }
 }
